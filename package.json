@@ -1,0 +1,46 @@
+{
+  "name": "claims-intelligence-ai",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Synthetic claims analytics foundation for a responsible AI portfolio project.",
+  "scripts": {
+    "build": "tsc && vite build",
+    "build:server": "tsc",
+    "dev": "concurrently -k -n API,UI -c blue,green \"npm:dev:api\" \"npm:dev:ui\"",
+    "dev:api": "npm run build:server && node dist/http/server.js",
+    "dev:ui": "vite --host 127.0.0.1 --strictPort",
+    "preview": "vite preview --host 127.0.0.1 --strictPort",
+    "db:generate": "npm run build && node dist/database/generate.js",
+    "db:reset": "npm run build && node dist/database/generate.js --reset",
+    "validate": "npm run build && node dist/database/validate.js",
+    "typecheck": "tsc --noEmit && tsc -p app/tsconfig.json --noEmit",
+    "analytics:verify": "npm run build && node dist/tools/verify-analytics.js",
+    "mcp:server": "npm run build && node dist/mcp/server.js",
+    "mcp:verify": "npm run build && node dist/mcp/verify.js",
+    "rag:index": "npm run build && node dist/rag/build-index.js",
+    "rag:verify": "npm run build && node dist/rag/verify.js",
+    "rag:retrieve": "npm run build && node dist/rag/retrieve.js",
+    "agent:verify": "npm run build && node dist/agent/verify-agent.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.31.0",
+    "better-sqlite3": "^12.2.0",
+    "concurrently": "^10.0.5",
+    "express": "^5.2.1",
+    "lucide-react": "^1.50.0",
+    "openai": "^7.25.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/express": "^5.0.6",
+    "@types/node": "^24.3.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.2"
+  }
+}
